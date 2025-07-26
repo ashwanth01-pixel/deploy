@@ -5,6 +5,7 @@ for ubuntu user{
 cat /home/ubuntu/.kube/config | base64 -w 0
 
 }
+
 for root user{
 
 mkdir -p /root/.kube
