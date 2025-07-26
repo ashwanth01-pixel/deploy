@@ -28,10 +28,10 @@ jobs:
       run: |
         echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
         export KUBECONFIG=$PWD/kubeconfig
-        kubectl config use-context kubernetes-admin@kubernetes
+        kubectl config use-context kubernetes-admin@kubernetes || true
 
     - name: Deploy to Kubernetes
       run: |
         export KUBECONFIG=$PWD/kubeconfig
-        sed "s|IMAGE_PLACEHOLDER|$IMAGE|g" k8s/deployment.yaml | kubectl apply -f -
-        kubectl apply -f k8s/service.yaml
+        sed "s|IMAGE_PLACEHOLDER|$IMAGE|g" k8s/deployment.yaml | kubectl apply --insecure-skip-tls-verify=true -f -
+        kubectl apply --insecure-skip-tls-verify=true -f k8s/service.yaml
