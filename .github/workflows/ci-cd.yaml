@@ -1,6 +1,6 @@
 name: CI/CD for Flask App
 
-#on:
+on:
   push:
     branches: [main]
 
